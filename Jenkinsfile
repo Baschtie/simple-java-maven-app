@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
-        archiveArtifacts 'simple-java-maven-app'
+        archiveArtifacts 'my-app'
       }
     }
 
