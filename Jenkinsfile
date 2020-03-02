@@ -26,19 +26,8 @@ pipeline {
     }
 
     stage('Deliver') {
-      parallel {
-        stage('Deliver') {
-          steps {
-            sh './jenkins/scripts/deliver.sh'
-          }
-        }
-
-        stage('error') {
-          steps {
-            archiveArtifacts '*'
-          }
-        }
-
+      steps {
+        sh './jenkins/scripts/deliver.sh'
       }
     }
 
