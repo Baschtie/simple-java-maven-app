@@ -15,14 +15,25 @@ pipeline {
     }
 
     stage('Test') {
-      post {
-        always {
-          junit 'target/surefire-reports/*.xml'
+      parallel {
+        stage('Test') {
+          post {
+            always {
+              junit 'target/surefire-reports/*.xml'
+            }
+
+          }
+          steps {
+            sh 'mvn test'
+          }
         }
 
-      }
-      steps {
-        sh 'mvn test'
+        stage('Save Artifact') {
+          steps {
+            archiveArtifacts 'target/*.jar'
+          }
+        }
+
       }
     }
 
